@@ -1,0 +1,5 @@
+@import "~tdp_core/src/styles/idtype_color";
+
+@at-root {
+ @include idtype_color('MyIDType', #be87ff);
+}

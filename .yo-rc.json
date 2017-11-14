@@ -1,0 +1,84 @@
+{
+  "generator-phovea": {
+    "type": "lib",
+    "libraries": [],
+    "libraryAliases": {},
+    "libraryExternals": [],
+    "modules": [
+      "tdp_core"
+    ],
+    "entries": "./index.js",
+    "ignores": [],
+    "extensions": [
+      {
+        "type": "tpdView",
+        "id": "hello-world",
+        "module": "HelloWorldView",
+        "extras": {
+          "name": "Hello World",
+          "idtype": ".*",
+          "selection": "some"
+        }
+      },
+      {
+        "type": "tdpView",
+        "id": "hello-ranking",
+        "module": "HelloRankingView",
+        "extras": {
+          "name": "Hello Ranking",
+          "idtype": "IDTypeA",
+          "selection": "some"
+        }
+      },
+      {
+        "type": "tdpScore",
+        "id": "myScore",
+        "module": "MyScore",
+        "extras": {
+          "name": "MyDB Score",
+          "idtype": "IDTypeA"
+        }
+      },
+      {
+        "type": "tdpScoreImpl",
+        "id": "mydbScore",
+        "module": "MyScore",
+        "extras": {
+          "factor": "new"
+        }
+      },
+      {
+        "type": "bobSearchProvider",
+        "id": "mydb",
+        "module": "MyDBSearchProvider",
+        "extras": {
+          "name": "My DB",
+          "idType": "MyIDType"
+        }
+      },
+      {
+        "type": "dTilesSearchProvider",
+        "id": "mydb",
+        "module": "MyDBSearchProvider",
+        "extras": {
+          "name": "My DB",
+          "idType": "MyIDType"
+        }
+      },
+      {
+        "type": "tdpView",
+        "id": "d3-view",
+        "module": "D3View",
+        "extras": {
+          "name": "Hello D3 View",
+          "idType:IDType": "idType:IDTypeA",
+          "selection:som": "selection:some"
+        }
+      }
+    ],
+    "name": "myplugin",
+    "author": "sluger",
+    "today": "Mon, 06 Nov 2017 11:21:19 GMT",
+    "githubAccount": "datavisyn"
+  }
+}
