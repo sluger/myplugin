@@ -46,7 +46,7 @@ module.exports = function(registry) {
 
   registry.push('tdpView', 'd3-view', function() { return import('./src/D3View'); }, {
   'name': 'Hello D3 View',
-  'idType': 'IDTypeA',
+  'idtype': 'IDTypeA',
   'selection': 'some'
  });
   // generator-phovea:end
