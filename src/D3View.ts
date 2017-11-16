@@ -2,6 +2,7 @@ import { getTDPRows } from 'tdp_core/src/rest';
 import { resolve } from 'phovea_core/src/idtype';
 import { AView } from 'tdp_core/src/views/AView';
 import * as d3 from 'd3v4';
+import './style.scss';
 
 interface IRow {
   _id: number;
@@ -20,6 +21,7 @@ interface IAggregatedData {
 
 
 export default class D3View extends AView {
+
   private static readonly MARGINS = {
     top: 20,
     right: 20,
@@ -33,13 +35,13 @@ export default class D3View extends AView {
   private static readonly CHART_WIDTH = D3View.SVG_WIDTH - D3View.MARGINS.left - D3View.MARGINS.right;
   private static readonly CHART_HEIGHT = D3View.SVG_HEIGHT - D3View.MARGINS.top - D3View.MARGINS.bottom;
 
-  private rows: IRow[];
-
   // 10 percent space (of the bar width) between bars
   private static readonly INNER_PADDING = 0.1;
 
   // 5 percent space (of the bar width) left of the first and right of the last bar
   private static readonly OUTER_PADDING = 0.05;
+
+  private rows: IRow[];
 
   private readonly x = d3.scaleBand()
     .rangeRound([0, D3View.CHART_WIDTH]) // output range along the x-axis
@@ -49,11 +51,13 @@ export default class D3View extends AView {
   private readonly y = d3.scaleLinear()
     .range([D3View.CHART_HEIGHT, 0]); // output range along the y-axis
 
+  private readonly xAxis = d3.axisBottom(this.x);
+  private readonly yAxis = d3.axisLeft(this.y);
+
   protected async initImpl() {
     super.initImpl();
-    this.rows = await D3View.loadRows();
-
-    // provide base markup
+    this.rows = await this.loadRows();
+    this.node.className = 'd3view';
     this.node.innerHTML = `
        <svg width="${D3View.SVG_WIDTH}" height="${D3View.SVG_HEIGHT}">
            <g class="chart-layer" transform="translate(${D3View.MARGINS.left}, ${D3View.MARGINS.top})"></g>
@@ -70,22 +74,26 @@ export default class D3View extends AView {
   }
 
   /**
-   * determines the IDType of the represented item rows
+   * get IDType for the item rows
    * @returns {IDType}
    */
   get itemIDType() {
     return resolve('IDTypeB');
   }
-
-  protected static loadRows(): Promise<IRow[]> {
+  
+  /**
+   * get data from the rest api
+   * @returns {Promise<IRow[]>}
+   */
+  protected loadRows(): Promise<IRow[]> {
     return getTDPRows('dummy', 'b');
   }
 
   /**
-  * Aggregate data by grouping by key with d3.nest. A group contains an array with all entries having the same key
-  * @param {IRow[]} data
-  * @returns {IAggregatedData[]}
-  */
+   * Aggregate data by grouping by key with d3.nest. A group contains an array with all entries having the same key
+   * @param {IRow[]} data
+   * @returns {IAggregatedData[]}
+   */
   private static aggregateData(data: IRow[]): IAggregatedData[] {
     return d3.nest()
       .key((d: IRow) => d.b_cat1)
@@ -121,10 +129,20 @@ export default class D3View extends AView {
     $barsEnterAndUpdate
       .attr('x', (group) => this.x(group.key))
       .attr('y', (group) => this.y(group.values.length))
-      .attr('width', this.x.bandwidth)
+      .attr('width', (group) => this.x.bandwidth())
       .attr('height', (group) => D3View.CHART_HEIGHT - this.y(group.values.length));
 
     // EXIT selection
     $bars.exit().remove();
+
+    this.updateAxes();
+  }
+
+  private updateAxes() {
+    const $xAxis = d3.select(this.node).select('.x-axis');
+    const $yAxis = d3.select(this.node).select('.y-axis');
+
+    $xAxis.call(this.xAxis);
+    $yAxis.call(this.yAxis);
   }
 }
