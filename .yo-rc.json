@@ -84,6 +84,16 @@
           "idtype": "IDTypeA",
           "selection": "some"
         }
+      },
+      {
+        "type": "tdpView",
+        "id": "table-view",
+        "module": "TableView",
+        "extras": {
+          "name": "Hello Table View",
+          "idtype": ".*",
+          "selection": "some"
+        }
       }
     ],
     "name": "myplugin",

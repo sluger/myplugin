@@ -56,6 +56,13 @@ module.exports = function(registry) {
   'idtype': 'IDTypeA',
   'selection': 'some'
  });
+
+
+  registry.push('tdpView', 'table-view', function() { return import('./src/TableView'); }, {
+  'name': 'Hello Table View',
+  'idtype': '.*',
+  'selection': 'some'
+ });
   // generator-phovea:end
 };
 
