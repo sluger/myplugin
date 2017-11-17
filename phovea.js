@@ -49,6 +49,13 @@ module.exports = function(registry) {
   'idtype': 'IDTypeA',
   'selection': 'some'
  });
+
+
+  registry.push('tdpView', 'chartjs', function() { return import('./src/ChartJS'); }, {
+  'name': 'Chart.js',
+  'idtype': 'IDTypeA',
+  'selection': 'some'
+ });
   // generator-phovea:end
 };
 

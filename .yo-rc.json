@@ -71,8 +71,18 @@
         "module": "D3View",
         "extras": {
           "name": "Hello D3 View",
-          "idType:IDType": "idType:IDTypeA",
+          "idType": "IDTypeA",
           "selection:som": "selection:some"
+        }
+      },
+      {
+        "type": "tdpView",
+        "id": "chartjs",
+        "module": "ChartJS",
+        "extras": {
+          "name": "Chart.js",
+          "idtype": "IDTypeA",
+          "selection": "some"
         }
       }
     ],

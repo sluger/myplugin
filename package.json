@@ -67,7 +67,9 @@
   "dependencies": {
     "tdp_core": "github:datavisyn/tdp_core#develop",
     "moment": "^2.19.1",
-    "d3v4": "github:sgratzl/d3v4"
+    "d3v4": "github:sgratzl/d3v4",
+    "@types/chart.js": "^2.7.0",
+    "chart.js": "^2.7.1"
   },
   "optionalDependencies": {
     "dTiles": "github:datavisyn/dTiles#tdp"
@@ -83,10 +85,10 @@
   },
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/sluger/myplugin/issues"
+    "url": "https://github.com/datavisyn/myplugin/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sluger/myplugin.git"
+    "url": "https://github.com/datavisyn/myplugin.git"
   }
 }
