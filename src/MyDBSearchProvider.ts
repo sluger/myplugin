@@ -1,13 +1,13 @@
-import {IResult, ISearchProvider} from 'dTiles/src/extensions';
-import {getTDPFilteredRows, getTDPLookup} from 'tdp_core/src/rest';
+import { IResult, ISearchProvider } from 'dTiles/src/extensions';
+import { getTDPFilteredRows, getTDPLookup } from 'tdp_core/src/rest';
 import './styles/idtype_color.scss';
-import {resolve} from 'phovea_core/src/idtype';
+import { resolve } from 'phovea_core/src/idtype';
 
 export default class MyDBSearchProvider implements ISearchProvider {
 
-  format(item: IResult, node: HTMLElement, mode: 'result'|'selection', currentSearchQuery: string) {
+  format(item: IResult, node: HTMLElement, mode: 'result' | 'selection', currentSearchQuery: RegExp) {
     
-    switch(mode) {
+    switch (mode) {
       case 'result':
         if (currentSearchQuery) {
           //highlight match
