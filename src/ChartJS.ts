@@ -36,6 +36,9 @@ export default class ChartJS extends AView {
     this.build();
   }
 
+  /**
+   * Aggregate data and render chart
+   */
   private build() {
     const ctx = (<HTMLCanvasElement>this.node.querySelector(`.${this.className} canvas`)).getContext('2d');
 
@@ -68,10 +71,6 @@ export default class ChartJS extends AView {
 
   protected loadRows(): Promise<IDummyData[]> {
     return getTDPData<IDummyData>('dummy', 'b');
-  }
-
-  private renderChart(rawData: IDummyData[]) {
-    // TODO: Aggregate data and render chart
   }
 
   private unique(data: IDummyData[], key: string) {
